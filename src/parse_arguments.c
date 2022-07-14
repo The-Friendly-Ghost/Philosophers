@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/07/12 15:36:44 by cpost         ########   odam.nl         */
+/*   Updated: 2022/07/14 12:29:47 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <limits.h>
 
 /**
  * Converts arguments to unsigned integers. If an input is invalid, an error
@@ -24,8 +25,8 @@
  */
 static unsigned int	ft_atoi(const char *argument, t_start *start)
 {
-	int				i;
-	unsigned int	number;
+	int			i;
+	long		number;
 
 	i = 0;
 	number = 0;
@@ -33,7 +34,8 @@ static unsigned int	ft_atoi(const char *argument, t_start *start)
 	{
 		if (argument[i] >= '0' && argument[i] <= '9')
 			number = (argument[i] - 48) + (number * 10);
-		else
+		if (argument[i] < '0' || argument[i] > '9'
+			|| number > INT_MAX)
 		{
 			if (start)
 				free(start);
@@ -42,7 +44,7 @@ static unsigned int	ft_atoi(const char *argument, t_start *start)
 		}
 		i++;
 	}
-	return (number);
+	return ((unsigned int)number);
 }
 
 /**
