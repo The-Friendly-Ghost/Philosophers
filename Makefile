@@ -6,7 +6,7 @@
 #    By: cpost <cpost@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/07/11 13:49:40 by cpost         #+#    #+#                  #
-#    Updated: 2022/07/12 14:48:37 by cpost         ########   odam.nl          #
+#    Updated: 2022/07/25 14:30:07 by cpost         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ OBJ_PATH = ./obj/
 #BON_PATH = ./bonus/
 INC_PATH = ./include/
 
-NAME = philosophers
-#BONUS_NAME = philosophers_bonus
+NAME = philo
+#BONUS_NAME = philo_bonus
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
