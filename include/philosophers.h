@@ -6,13 +6,15 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/07/29 15:01:02 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/01 13:55:44 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
+# include <stdbool.h>
+# include <pthread.h>
 # include <stdbool.h>
 
 typedef enum e_exit {
@@ -28,14 +30,19 @@ typedef struct s_data {
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
-	unsigned int	x_times_to_eat;
+	long			x_times_to_eat;
+	unsigned int	philo_died;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	philo_died;
+	pthread_mutex_t	write;
 }	t_data;
 
 typedef struct s_philo {
 	unsigned int	id;
 	unsigned int	x_eaten;
 	unsigned int	last_meal;
-	pthread_mutex_t	
+	pthread_mutex_t	fork_left;
+	pthread_mutex_t	fork_right;
 	t_data			*data;
 }	t_philo;
 
