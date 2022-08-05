@@ -117,7 +117,7 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (NULL);
-	if (parse_arguments(data, argument_count, argument) == fal)
+	if (parse_arguments(data, argument_count, argument) == false)
 	{
 		free(data);
 		return (NULL);
