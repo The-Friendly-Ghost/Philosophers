@@ -31,7 +31,7 @@ typedef struct s_data {
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
 	unsigned int	x_times_to_eat;
-	bool			x_times_to_eat_on;
+	bool			eat_limit_enabled;
 	unsigned long	start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	philo_dead_lock;

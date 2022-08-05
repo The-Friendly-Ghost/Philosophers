@@ -89,10 +89,10 @@ static int	parse_arguments(t_data *data, int argument_count, char **argument)
 	{
 		if (str_to_int(argument[5], &data->x_times_to_eat) == FAILURE)
 			return (FAILURE);
-		data->x_times_to_eat_on = true;
+		data->eat_limit_enabled = true;
 	}
 	if (argument_count != 6)
-		data->x_times_to_eat_on = false;
+		data->eat_limit_enabled = false;
 	if (check_if_arguments_are_not_zero(data) == FAILURE)
 		return (FAILURE);
 	return (SUCCES);
