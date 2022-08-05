@@ -19,10 +19,7 @@
 
 typedef enum e_validation {
 	SUCCES,
-	FAILURE,
-	VALID_INPUT,
-	NO_VALID_INPUT,
-	MALLOC_FAIL
+	FAILURE
 }	exit_code;
 
 typedef struct s_data {
