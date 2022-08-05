@@ -22,17 +22,17 @@
  * @param data Struct with the program data in it
  * @return unsigned int 
  */
-static unsigned int	check_if_arguments_are_not_zero(t_data *data)
+static bool	an_argument_is_zero(t_data *data)
 {
 	if (data->amount_philosophers == 0 || data->time_to_die == 0
 		|| data->time_to_eat == 0 || data->time_to_sleep == 0
-		|| (data->x_times_to_eat == 0 && data->x_times_to_eat_on == true))
+		|| (data->eat_limit == 0 && data->eat_limit_enabled == true))
 		{
 			printf("Error: arguments can not be 0 or less\n");
-			return (NO_VALID_INPUT);
+			return (true);
 		}
 	else
-		return (VALID_INPUT);
+		return (false);
 }
 
 /**
@@ -42,7 +42,7 @@ static unsigned int	check_if_arguments_are_not_zero(t_data *data)
  * @param data Struct with the program data in it
  * @return unsigned int 
  */
-static unsigned int	str_to_int(const char *argument, unsigned int *data)
+static bool	str_to_int(const char *argument, unsigned int *data)
 {
 	int			i;
 	long		number;
@@ -59,12 +59,12 @@ static unsigned int	str_to_int(const char *argument, unsigned int *data)
 			|| number > INT_MAX)
 		{
 			printf("Error: argument %i not valid\n", argument_number);
-			return(FAILURE);
+			return(false);
 		}
 		i++;
 	}
 	*data = (unsigned int)number;
-	return (SUCCES);
+	return (true);
 }
 
 /**
@@ -75,27 +75,27 @@ static unsigned int	str_to_int(const char *argument, unsigned int *data)
  * @return t_data struct if arguments are valid. NULL if arguments are 
  * not valid. 
  */
-static int	parse_arguments(t_data *data, int argument_count, char **argument)
+static bool	parse_arguments(t_data *data, int argument_count, char **argument)
 {
-	if (str_to_int(argument[1], &data->amount_philosophers) == FAILURE)
-		return (FAILURE);
-	if (str_to_int(argument[2], &data->time_to_die) == FAILURE)
-		return (FAILURE);
-	if (str_to_int(argument[3], &data->time_to_eat) == FAILURE)
-		return (FAILURE);
-	if (str_to_int(argument[4], &data->time_to_sleep) == FAILURE)
-		return (FAILURE);
+	if (str_to_int(argument[1], &data->amount_philosophers) == false)
+		return (false);
+	if (str_to_int(argument[2], &data->time_to_die) == false)
+		return (false);
+	if (str_to_int(argument[3], &data->time_to_eat) == false)
+		return (false);
+	if (str_to_int(argument[4], &data->time_to_sleep) == false)
+		return (false);
 	if (argument_count == 6)
 	{
-		if (str_to_int(argument[5], &data->x_times_to_eat) == FAILURE)
-			return (FAILURE);
+		if (str_to_int(argument[5], &data->eat_limit) == false)
+			return (false);
 		data->eat_limit_enabled = true;
 	}
 	if (argument_count != 6)
 		data->eat_limit_enabled = false;
-	if (check_if_arguments_are_not_zero(data) == FAILURE)
-		return (FAILURE);
-	return (SUCCES);
+	if (an_argument_is_zero(data))
+		return (false);
+	return (true);
 }
 
 /**

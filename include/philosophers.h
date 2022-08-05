@@ -17,20 +17,20 @@
 # include <pthread.h>
 # include <stdbool.h>
 
-typedef enum e_exit {
+typedef enum e_validation {
 	SUCCES,
 	FAILURE,
 	VALID_INPUT,
 	NO_VALID_INPUT,
 	MALLOC_FAIL
-}	t_exit;
+}	exit_code;
 
 typedef struct s_data {
 	unsigned int	amount_philosophers;
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
-	unsigned int	x_times_to_eat;
+	unsigned int	eat_limit;
 	bool			eat_limit_enabled;
 	unsigned long	start_time;
 	pthread_mutex_t	*forks;
