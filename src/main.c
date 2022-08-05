@@ -17,21 +17,22 @@
 
 void	leaks_func(void)
 {
-	system("leaks Philosophers");
+	system("leaks philo");
 }
 
-int	main(int argument_count, char **argument)
+int	main(int argument_count, char **arguments)
 {
 	t_data	*data;
-	t_philo	*philos;
+	//t_philo	*philos;
 
 	//atexit(leaks_func);
-	data = parse_arguments(argument_count, argument);
+	//philos = NULL;
+	data = initiate_data_struct(argument_count, arguments);
 	if (data == NULL)
 		return (FAILURE);
-	philos = init_philos(data);
-	if (philos = NULL)
-		return (FAILURE);
+	//philos = init_philos(data);
+	//if (philos = NULL)
+	//	return (FAILURE);
 	free(data);
 	return (SUCCES);
 }

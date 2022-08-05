@@ -20,8 +20,8 @@
 typedef enum e_exit {
 	SUCCES,
 	FAILURE,
-	INPUT_VALID,
-	INPUT_NOT_VALID,
+	VALID_INPUT,
+	NO_VALID_INPUT,
 	MALLOC_FAIL
 }	t_exit;
 
@@ -30,25 +30,25 @@ typedef struct s_data {
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
-	long			x_times_to_eat;
-	unsigned int	philo_died;
+	unsigned int	x_times_to_eat;
+	bool			x_times_to_eat_on;
+	unsigned long	start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	philo_died;
-	pthread_mutex_t	write;
+	pthread_mutex_t	philo_dead_lock;
+	bool			philo_dead;
+	pthread_mutex_t	write_lock;
 }	t_data;
 
 typedef struct s_philo {
 	unsigned int	id;
 	unsigned int	x_eaten;
 	unsigned int	last_meal;
-	pthread_mutex_t	fork_left;
-	pthread_mutex_t	fork_right;
 	t_data			*data;
 }	t_philo;
 
-//parse_arguments.c
+//initiate_data_struct.c
 
-t_data	*parse_arguments(int argument_count, char **argument);
+t_data	*initiate_data_struct(int argument_count, char **argument);
 
 //main.c
 
