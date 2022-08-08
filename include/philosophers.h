@@ -43,6 +43,10 @@ typedef struct s_philo {
 	t_data			*data;
 }	t_philo;
 
+//utils.c
+
+bool	an_argument_is_zero(t_data *data);
+
 //initiate_data_struct.c
 
 t_data	*initiate_data_struct(int argument_count, char **argument);

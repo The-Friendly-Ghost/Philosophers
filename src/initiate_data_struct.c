@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_arguments.c                                  :+:    :+:            */
+/*   initiate_data_struct.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/07/29 14:55:36 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/07 17:27:35 by casper        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,16 @@
 #include <limits.h>
 
 /**
- * Checks if any of the arguments is 0
+ * Initiate mutexes in the data struct
  * @param data Struct with the program data in it
- * @return unsigned int 
+ * @return True if initiation without error. False if there
+ * is an error somewhere.
  */
-static bool	an_argument_is_zero(t_data *data)
+static bool	initiation_of_mutexes_in_data_struct(t_data *data)
 {
-	if (data->amount_philosophers == 0 || data->time_to_die == 0
-		|| data->time_to_eat == 0 || data->time_to_sleep == 0
-		|| (data->eat_limit == 0 && data->eat_limit_enabled == true))
-		{
-			printf("Error: arguments can not be 0 or less\n");
-			return (true);
-		}
-	else
+	if (initiate_array_of_forks(data->amount_philosophers, &data->forks) == false)
 		return (false);
+	
 }
 
 /**
@@ -42,7 +37,7 @@ static bool	an_argument_is_zero(t_data *data)
  * @param data Struct with the program data in it
  * @return unsigned int 
  */
-static bool	str_to_int(const char *argument, unsigned int *data)
+static bool	convert_str_to_int(const char *argument, unsigned int *data)
 {
 	int			i;
 	long		number;
@@ -77,17 +72,17 @@ static bool	str_to_int(const char *argument, unsigned int *data)
  */
 static bool	parse_arguments(t_data *data, int argument_count, char **argument)
 {
-	if (str_to_int(argument[1], &data->amount_philosophers) == false)
+	if (convert_str_to_int(argument[1], &data->amount_philosophers) == false)
 		return (false);
-	if (str_to_int(argument[2], &data->time_to_die) == false)
+	if (convert_str_to_int(argument[2], &data->time_to_die) == false)
 		return (false);
-	if (str_to_int(argument[3], &data->time_to_eat) == false)
+	if (convert_str_to_int(argument[3], &data->time_to_eat) == false)
 		return (false);
-	if (str_to_int(argument[4], &data->time_to_sleep) == false)
+	if (convert_str_to_int(argument[4], &data->time_to_sleep) == false)
 		return (false);
 	if (argument_count == 6)
 	{
-		if (str_to_int(argument[5], &data->eat_limit) == false)
+		if (convert_str_to_int(argument[5], &data->eat_limit) == false)
 			return (false);
 		data->eat_limit_enabled = true;
 	}
@@ -118,6 +113,11 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 	if (data == NULL)
 		return (NULL);
 	if (parse_arguments(data, argument_count, argument) == false)
+	{
+		free(data);
+		return (NULL);
+	}
+	if (initiation_of_mutexes_in_data_struct(data) == false)
 	{
 		free(data);
 		return (NULL);
