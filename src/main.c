@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/08 20:27:59 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/08 20:49:45 by casper        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argument_count, char **arguments)
 		return (FAILURE);
 	philos = initiate_philo_struct(data);
 	if (philos = NULL)
-		return (FAILURE);
+		return (FAILURE); //Destroy data and mutexes in it
 	free(data);
 	return (SUCCES);
 }
