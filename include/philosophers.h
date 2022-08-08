@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/01 13:55:44 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/08 16:59:22 by casper        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <stdbool.h>
+
+# define mutex pthread_mutex_t
 
 typedef enum e_validation {
 	SUCCES,
@@ -27,19 +29,21 @@ typedef struct s_data {
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
+	unsigned long	start_time;
 	unsigned int	eat_limit;
 	bool			eat_limit_enabled;
-	unsigned long	start_time;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	philo_dead_lock;
 	bool			philo_dead;
-	pthread_mutex_t	write_lock;
+	mutex			philo_dead_lock;
+	mutex			write_lock;
+	mutex			*forks;
 }	t_data;
 
 typedef struct s_philo {
 	unsigned int	id;
 	unsigned int	x_eaten;
 	unsigned int	last_meal;
+	mutex			*left_fork;
+	mutex			*right_fork;
 	t_data			*data;
 }	t_philo;
 
