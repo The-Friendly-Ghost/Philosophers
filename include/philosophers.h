@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/08 16:59:22 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/09 18:41:06 by casper        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@ typedef struct s_philo {
 //utils.c
 
 bool	an_argument_is_zero(t_data *data);
+long	get_current_time(void);
 
 //initiate_data_struct.c
 
 t_data	*initiate_data_struct(int argument_count, char **argument);
+
+//initiate_philo_struct.c
+
+t_philo	*initiate_philo_struct(t_data *data);
 
 //main.c
 
