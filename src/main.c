@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/08 20:50:12 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/09 18:39:27 by casper        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	leaks_func(void)
 int	main(int argument_count, char **arguments)
 {
 	t_data	*data;
-	t_philo	**philos;
+	t_philo	*philos;
 
 	//atexit(leaks_func);
 	philos = NULL;
@@ -40,7 +40,7 @@ int	main(int argument_count, char **arguments)
 	if (data == NULL)
 		return (FAILURE);
 	philos = initiate_philo_struct(data);
-	if (philos = NULL)
+	if (philos == NULL)
 		return (FAILURE); //todo: destroy data and mutexes in it
 	free(data);
 	return (SUCCES);
