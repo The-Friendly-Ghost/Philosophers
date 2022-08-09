@@ -6,11 +6,13 @@
 /*   By: casper <casper@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/07 17:19:20 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/09 18:50:58 by casper        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <stdio.h>
+#include <sys/time.h>
 #include <stdio.h>
 
 /**
@@ -29,4 +31,18 @@ bool	an_argument_is_zero(t_data *data)
 		}
 	else
 		return (false);
+}
+
+/**
+ * Gets the current time (in microseconds)
+ * @return The time
+ */
+long	get_current_time(void)
+{
+	struct timeval	time;
+	
+	if (gettimeofday(&time, NULL) != 0)
+		return (0); // Change this. If gettimeofday doesn't return 0, delete
+					// structs and exit program
+	return(time.tv_sec * 1000 + time.tv_usec / 1000);
 }
