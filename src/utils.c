@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: casper <casper@student.codam.nl>             +#+                     */
+/*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/09 18:50:58 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/11 17:35:56 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

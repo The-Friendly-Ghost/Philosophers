@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/09 18:41:06 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/11 17:37:53 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_data {
 	mutex			philo_dead_lock;
 	mutex			write_lock;
 	mutex			*forks;
+	pthread_t		*thread;
 }	t_data;
 
 typedef struct s_philo {
@@ -46,6 +47,10 @@ typedef struct s_philo {
 	mutex			*right_fork;
 	t_data			*data;
 }	t_philo;
+
+//main.c
+
+void	print_values(t_data	*data);
 
 //utils.c
 
@@ -60,8 +65,13 @@ t_data	*initiate_data_struct(int argument_count, char **argument);
 
 t_philo	*initiate_philo_struct(t_data *data);
 
-//main.c
+//initiate_threads.c
 
-void	print_values(t_data	*data);
+bool	initiate_philo_threads(t_philo *philo, t_data *data);
+
+//philosopher.c
+
+void	*run_philosopher(void *philo_struct);
+
 
 #endif
