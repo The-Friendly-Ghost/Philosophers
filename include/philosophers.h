@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/14 17:06:38 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/14 21:00:21 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # include <stdbool.h>
 
 # define mutex pthread_mutex_t
+# define philo_id_is_an_odd_number philo->id % 2 == 0
 
-typedef enum e_validation {
+typedef enum e_status {
 	SUCCES,
 	FAILURE
-}	exit_code;
+}	e_status;
 
 typedef struct s_data {
 	unsigned int	amount_philosophers;
