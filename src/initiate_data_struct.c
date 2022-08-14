@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/08 20:27:50 by casper        ########   odam.nl         */
+/*   Updated: 2022/08/14 15:47:28 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static bool	initiation_of_mutexes_in_data_struct(t_data *data)
 	if (pthread_mutex_init(&data->philo_dead_lock, NULL) != 0)
 		return (false);
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
+		return (false);
+	if (pthread_mutex_init(&data->thread_init_failed_lock, NULL) != 0)
 		return (false);
 	return (true);
 }
@@ -157,5 +159,8 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 		free(data);
 		return (NULL);
 	}
+	data->philo_dead = false;
+	data->thread_init_failed = false;
+	data->start_time = get_current_time();
 	return (data);
 }

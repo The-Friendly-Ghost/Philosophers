@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/11 17:37:53 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/14 17:06:38 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_data {
 	unsigned int	eat_limit;
 	bool			eat_limit_enabled;
 	bool			philo_dead;
+	bool			thread_init_failed;
+	mutex			thread_init_failed_lock;
 	mutex			philo_dead_lock;
 	mutex			write_lock;
 	mutex			*forks;
@@ -72,6 +74,13 @@ bool	initiate_philo_threads(t_philo *philo, t_data *data);
 //philosopher.c
 
 void	*run_philosopher(void *philo_struct);
+
+//philosopher_actions.c
+
+void	eat(t_philo *philo);
+void	sleep(t_philo *philo);
+void	think(t_philo *philo);
+void	repeat(void);
 
 
 #endif
