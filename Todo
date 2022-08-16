@@ -1,0 +1,34 @@
+Parse Input. Check of argumenten kloppen
+Initialize de structs en de mutexes
+Start de threads (voor elke philo een thread)
+
+Thread loop:
+1. Check of er een fork links of rechts beschikbaar is.
+2. Is er een vork beschikbaar, pak deze dan.
+3. Geen vork beschikbaar? Ga dan in wachtstand (denken) totdat er een vork beschikbaar is.
+4. Heeft een philo beide vorken? Dan start eten.
+5. Als TTE is gehaald, leg vorken dan neer en ga slapen.
+6. Als klaar met slapen,, repeat.
+
+Checken:
+1. Is er een philosopher dood? Zo ja, stop programma direct.
+2. is de x_times_to_eat gehaald voor alle philos? Stop programma.
+
+MAG EXIT??
+Waarom USLEEP bij het maken van de threads?
+Kun je mutexes destroyen als ze niet zijn aangemaakt? Hier moet je voor checken toch?
+
+
+
+verbeteringen
+- Maak een aparte write thread waar je een queue in maakt voor de te schrijven opdrachten. Hoeveel plekken
+moet de queue hebben? Doe het aantal philosophers x10 plekken. Dan is de buffer groot genoeg.
+- Bij oneven aantal philo's: time_to_eat moet op zijn minst 2x passen in time_to_sleep + time_to_think. Zo
+voorkom je die rare usleep waardoor sommige philo's vertraagd starten.
+voorbeelden: 
+- Time_to_eat = 200 en time_to_sleep is 100, dan is time_to_think 100.
+- Time_to_eat = 100 en time_to_sleep is 120, dan is time_to_think 80.
+- Time_to_eat = 200 en time_to_sleep is 200, dan is time_to_think 0.
+- Time_to_eat = 100 en time_to_sleep is 200, dan is time_to_think 0.
+- Time_to_eat = 200 en time_to_sleep is 500, dan is time_to_think 150.
+Bij een even aantal philo's vervalt deze regel. Laat alle philo's tegelijk starten en het lost zichzelf op.
