@@ -6,14 +6,13 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/11 17:39:42 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/29 13:30:18 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <pthread.h> 
 
 void	leaks_func(void)
 {

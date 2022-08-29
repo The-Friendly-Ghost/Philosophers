@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/14 15:47:28 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/29 18:58:28 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ static bool	initiate_forks(unsigned int amount_philos, mutex *fork_array)
 	fork_id = 0;
 	while (fork_id < amount_philos)
 	{
-		pthread_mutex_init(&fork_array[fork_id], NULL);
+		if (pthread_mutex_init(&fork_array[fork_id], NULL) != 0)
+		{
+			destroy_forks(fork_array, fork_id);
+			return (false);
+		}
 		fork_id++;
 	}
 	return (true);
@@ -48,16 +52,25 @@ static bool	initiate_forks(unsigned int amount_philos, mutex *fork_array)
  *  @note Functions location :
  * 'initiate_forks' > same file
  */
-static bool	initiation_of_mutexes_in_data_struct(t_data *data)
+static bool	initiate_mutexes_in_data_struct(t_data *data)
 {
 	if (initiate_forks(data->amount_philosophers, data->forks) == false)
 		return (false);
 	if (pthread_mutex_init(&data->philo_dead_lock, NULL) != 0)
+	{
+		destroy_mutexes(data, 0);
 		return (false);
+	}
 	if (pthread_mutex_init(&data->write_lock, NULL) != 0)
+	{
+		destroy_mutexes(data, 1);
 		return (false);
-	if (pthread_mutex_init(&data->thread_init_failed_lock, NULL) != 0)
+	}
+	if (pthread_mutex_init(&data->thread_init_lock, NULL) != 0)
+	{
+		destroy_mutexes(data, 2);
 		return (false);
+	}
 	return (true);
 }
 
@@ -102,6 +115,7 @@ static bool	convert_str_to_int(const char *argument, unsigned int *data)
  * not valid. 
  * @note Functions location :
  * 'an_argument_is_zero' > utils.c
+ * 'set_time_to_think' > utils.c;
  * 'convert_str_to_int' > same file
  */
 static bool	parse_arguments(t_data *data, int argument_count, char **argument)
@@ -114,6 +128,7 @@ static bool	parse_arguments(t_data *data, int argument_count, char **argument)
 		return (false);
 	if (convert_str_to_int(argument[4], &data->time_to_sleep) == false)
 		return (false);
+	set_time_to_think(data);
 	if (argument_count == 6)
 	{
 		if (convert_str_to_int(argument[5], &data->eat_limit) == false)
@@ -135,7 +150,7 @@ static bool	parse_arguments(t_data *data, int argument_count, char **argument)
  * not valid. 
  * @note Functions location :
  * 'parse_arguments' > same file
- * 'initiation_of_mutexes_in_data_struct' > same file
+ * 'initiate_mutexes_in_data_struct' > same file
  */
 t_data	*initiate_data_struct(int argument_count, char **argument)
 {
@@ -154,7 +169,7 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 		free(data);
 		return (NULL);
 	}
-	if (initiation_of_mutexes_in_data_struct(data) == false)
+	if (initiate_mutexes_in_data_struct(data) == false)
 	{
 		free(data);
 		return (NULL);

@@ -6,14 +6,30 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/11 17:35:56 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/29 14:29:39 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
 #include <sys/time.h>
 #include <stdio.h>
+
+/**
+ * If the amount of philosophers is odd, then the time to eat must fit
+ * at least 2 times in to time_to_sleep + time_to_think. This is to
+ * prevent a philosopher from getting to eat two times in a row while 
+ * the philosopher next to him hasn't eaten yet.
+ * @param data Struct with the program data in it
+ * @return nothing
+ */
+void	set_time_to_think(t_data *data)
+{
+	if (data->amount_philosophers % 2 == 1 && (data->time_to_eat * 2)
+		> data->time_to_sleep)
+		data->time_to_think = (data->time_to_eat * 2) - data->time_to_sleep;
+	else
+		data->time_to_think = 0;
+}
 
 /**
  * Checks if any of the arguments in the data struct is 0

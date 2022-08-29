@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/14 21:00:21 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/29 18:56:54 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ typedef struct s_data {
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
+	unsigned int	time_to_think;
 	unsigned long	start_time;
 	unsigned int	eat_limit;
 	bool			eat_limit_enabled;
 	bool			philo_dead;
 	bool			thread_init_failed;
-	mutex			thread_init_failed_lock;
+	mutex			thread_init_lock;
 	mutex			philo_dead_lock;
 	mutex			write_lock;
 	mutex			*forks;
@@ -82,6 +83,11 @@ void	eat(t_philo *philo);
 void	sleep(t_philo *philo);
 void	think(t_philo *philo);
 void	repeat(void);
+
+//destroy_mutexes.c
+
+void	destroy_mutexes(t_data *data, unsigned int mutexes_created);
+void	destroy_forks(mutex *fork_array, unsigned int created_forks);
 
 
 #endif
