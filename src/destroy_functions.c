@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   destroy_mutexes.c                                  :+:    :+:            */
+/*   destroy_functions.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 13:29:26 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/29 18:58:33 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 13:48:43 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param created_forks The amount of forks in the fork_array.
  * @return Nothing
  */
-void	destroy_forks(mutex *fork_array, unsigned int created_forks)
+void	destroy_forks(pthread_mutex_t *fork_array, unsigned int created_forks)
 {
 	unsigned int	i;
 
@@ -45,4 +45,19 @@ void	destroy_mutexes(t_data *data, unsigned int mutexes_created)
 	if (mutexes_created > 2)
 		pthread_mutex_destroy(&data->thread_init_lock);
 	destroy_forks(data->forks, data->amount_philosophers);
+}
+
+/**
+ * Destroys all the program data
+ * @param data Struct with all the created mutexes in it.
+ * @param philo Struct with all the philo's in it
+ * @return Nothing
+ */
+void	destroy_all(t_data *data, t_philo *philo)
+{
+	destroy_mutexes(data, 3);
+	if (data)
+		free(data);
+	if (philo)
+		free(philo);
 }

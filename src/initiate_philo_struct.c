@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:35 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/29 14:00:52 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 15:15:00 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_philo	*initiate_philo_struct(t_data *data)
 	t_philo			*philo;
 	unsigned int	i;
 
-	philo = calloc(data->amount_philosophers, sizeof(t_philo)); // is Calloc toegestaan?
+	philo = ft_calloc(data->amount_philosophers, sizeof(t_philo));
 	if (philo == NULL)
 		return (NULL);
 	i = 0;

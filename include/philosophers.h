@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/29 18:56:54 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 15:00:12 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 # include <pthread.h>
 # include <stdbool.h>
 
-# define mutex pthread_mutex_t
-# define philo_id_is_an_odd_number philo->id % 2 == 0
-
 typedef enum e_status {
 	SUCCES,
 	FAILURE
-}	e_status;
+}	t_status;
 
 typedef struct s_data {
+	char			**print_queue;
 	unsigned int	amount_philosophers;
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
@@ -36,10 +34,10 @@ typedef struct s_data {
 	bool			eat_limit_enabled;
 	bool			philo_dead;
 	bool			thread_init_failed;
-	mutex			thread_init_lock;
-	mutex			philo_dead_lock;
-	mutex			write_lock;
-	mutex			*forks;
+	pthread_mutex_t	thread_init_lock;
+	pthread_mutex_t	philo_dead_lock;
+	pthread_mutex_t	write_lock;
+	pthread_mutex_t	*forks;
 	pthread_t		*thread;
 }	t_data;
 
@@ -47,8 +45,8 @@ typedef struct s_philo {
 	unsigned int	id;
 	unsigned int	x_eaten;
 	unsigned int	last_meal;
-	mutex			*left_fork;
-	mutex			*right_fork;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 	t_data			*data;
 }	t_philo;
 
@@ -87,7 +85,6 @@ void	repeat(void);
 //destroy_mutexes.c
 
 void	destroy_mutexes(t_data *data, unsigned int mutexes_created);
-void	destroy_forks(mutex *fork_array, unsigned int created_forks);
-
+void	destroy_forks(pthread_mutex_t *fork_array, unsigned int created_forks);
 
 #endif

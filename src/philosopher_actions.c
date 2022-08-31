@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 17:04:43 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/14 20:43:24 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 15:15:22 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	eat(t_philo *philo)
 {
-	
+
 }
 
 void	sleep(t_philo *philo)

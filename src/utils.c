@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/29 14:29:39 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 15:10:53 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ bool	an_argument_is_zero(t_data *data)
 	if (data->amount_philosophers == 0 || data->time_to_die == 0
 		|| data->time_to_eat == 0 || data->time_to_sleep == 0
 		|| (data->eat_limit == 0 && data->eat_limit_enabled == true))
-		{
-			printf("Error: arguments can not be 0 or less\n");
-			return (true);
-		}
+	{
+		printf("Error: arguments can not be 0 or less\n");
+		return (true);
+	}
 	else
 		return (false);
 }
@@ -56,9 +56,39 @@ bool	an_argument_is_zero(t_data *data)
 long	get_current_time(void)
 {
 	struct timeval	time;
-	
+
 	if (gettimeofday(&time, NULL) != 0)
 		return (0); // Change this. If gettimeofday doesn't return 0, delete
 					// structs and exit program
-	return(time.tv_sec * 1000 + time.tv_usec / 1000);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+static void	*ft_bzero(void *s, size_t n)
+{
+	unsigned char	*x;
+
+	x = s;
+	while (n > 0)
+	{
+		*x = 0;
+		x++;
+		n--;
+	}
+	return (s);
+}
+
+/**
+ * @brief Create a new array and fill the entire array with 0 (using ft_bzero)
+ * @param nmemb The amount of elements to be created
+ * @param size The size of each element
+ * @return void * - Address to array filled with 0's
+ */
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*ptr;
+
+	ptr = malloc(nmemb * size);
+	if (ptr)
+		ft_bzero(ptr, (nmemb * size));
+	return (ptr);
 }

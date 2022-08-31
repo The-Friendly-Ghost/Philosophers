@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/29 13:30:18 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 13:43:06 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	main(int argument_count, char **arguments)
 		return (FAILURE);
 	philo = initiate_philo_struct(data);
 	if (philo == NULL)
-		return (FAILURE); //todo: destroy data and mutexes in it
+		return (destroy_all(data, philo), FAILURE);
 	if (initiate_philo_threads(philo, data) == false)
-		return (FAILURE); //todo: destroy data, philo and mutexes
-	free(data);
-	return (SUCCES);
+		return (destroy_all(data, philo), FAILURE);
+	// Threads joinen
+	return (destroy_all(data, philo), SUCCES);
 }

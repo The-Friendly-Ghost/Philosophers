@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/10 10:06:34 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/29 12:24:43 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 13:34:43 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ bool	initiate_philo_threads(t_philo *philo, t_data *data)
 	pthread_mutex_lock(&data->thread_init_lock);
 	while (i < data->amount_philosophers)
 	{
-		if (pthread_create(&data->thread[i], NULL, run_philosopher, 
-			&philo[i]) != 0)
-			{
-				data->thread_init_failed = true;
-				pthread_mutex_unlock(&data->thread_init_lock);
-				return (false); // DELETE ALL DATA IF FALSE
-			}
+		if (pthread_create(&data->thread[i], NULL, run_philosopher,
+				&philo[i]) != 0)
+		{
+			data->thread_init_failed = true;
+			pthread_mutex_unlock(&data->thread_init_lock);
+			return (false);
+		}
 		i++;
 	}
 	pthread_mutex_unlock(&data->thread_init_lock);

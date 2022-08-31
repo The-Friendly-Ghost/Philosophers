@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/29 18:58:28 by cpost         ########   odam.nl         */
+/*   Updated: 2022/08/31 15:14:41 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@
  * @return True if initiation without error. False if there
  * is an error somewhere.
  */
-static bool	initiate_forks(unsigned int amount_philos, mutex *fork_array)
+static bool	initiate_forks(unsigned int amount_philos,
+		pthread_mutex_t *fork_array)
 {
 	unsigned int	fork_id;
-	
-	fork_array = calloc(amount_philos, sizeof(mutex)); //IS CALLOC ALLOWED??? CHECK THIS!
+
+	fork_array = ft_calloc(amount_philos, sizeof(pthread_mutex_t));
 	if (fork_array == NULL)
 		return (false);
 	fork_id = 0;
@@ -98,7 +99,7 @@ static bool	convert_str_to_int(const char *argument, unsigned int *data)
 			|| number > INT_MAX)
 		{
 			printf("Error: argument %i not valid\n", argument_number);
-			return(false);
+			return (false);
 		}
 		i++;
 	}
