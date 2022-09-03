@@ -58,6 +58,8 @@ void	print_values(t_data	*data);
 
 bool	an_argument_is_zero(t_data *data);
 long	get_current_time(void);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	set_time_to_think(t_data *data);
 
 //initiate_data_struct.c
 
@@ -77,14 +79,14 @@ void	*run_philosopher(void *philo_struct);
 
 //philosopher_actions.c
 
-void	eat(t_philo *philo);
-void	sleep(t_philo *philo);
-void	think(t_philo *philo);
-void	repeat(void);
+bool	eating(t_philo *philo);
+bool	sleeping(t_philo *philo);
+bool	thinking(t_philo *philo);
 
 //destroy_mutexes.c
 
 void	destroy_mutexes(t_data *data, unsigned int mutexes_created);
 void	destroy_forks(pthread_mutex_t *fork_array, unsigned int created_forks);
+void	destroy_all(t_data *data, t_philo *philo);
 
 #endif

@@ -14,18 +14,23 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void	eat(t_philo *philo)
+static bool pick_up_forks(t_philo *philo)
+{
+	
+}
+
+bool	eating(t_philo *philo)
 {
 
 }
 
-void	sleep(t_philo *philo)
+bool	sleeping(t_philo *philo)
 {
 	long	sleep_start_time;
 	long	program_time_elapsed;
 
 	if (terminate_thread_conditions(philo) == true)
-		return ;
+		return (false);
 	sleep_start_time = get_current_time();
 	program_time_elapsed = sleep_start_time - philo->data->start_time;
 	pthread_mutex_lock(&philo->data->write_lock);
@@ -34,11 +39,11 @@ void	sleep(t_philo *philo)
 	while (get_current_time() - sleep_start_time < philo->data->time_to_sleep)
 	{
 		if (terminate_thread_conditions(philo) == true)
-			return ;
+			return (true);
 	}
 }
 
-void	rave(t_philo *philo)
+bool	thinking(t_philo *philo)
 {
 	long	time;
 
@@ -46,14 +51,6 @@ void	rave(t_philo *philo)
 		return ;
 	time = get_current_time() - philo->data->start_time;
 	pthread_mutex_lock(&philo->data->write_lock);
-	printf("%010ld - Philo %d is raving\n", time, philo->id);
+	printf("%010ld - Philo %d is thinking\n", time, philo->id);
 	pthread_mutex_unlock(&philo->data->write_lock);
-}
-
-/**
- * Just for the pun.
- */
-void	repeat(void)
-{
-	return ;
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
+#include <stdlib.h>
 
 /**
  * Destroys all the created fork mutexes.
