@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/31 15:00:12 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/09 15:23:04 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <stdbool.h>
+# include <stdio.h>
 
 typedef enum e_status {
 	SUCCES,
@@ -37,6 +38,7 @@ typedef struct s_data {
 	pthread_mutex_t	thread_init_lock;
 	pthread_mutex_t	philo_dead_lock;
 	pthread_mutex_t	write_lock;
+	pthread_mutex_t	queue_lock;
 	pthread_mutex_t	*forks;
 	pthread_t		*thread;
 }	t_data;
@@ -71,7 +73,7 @@ t_philo	*initiate_philo_struct(t_data *data);
 
 //initiate_threads.c
 
-bool	initiate_philo_threads(t_philo *philo, t_data *data);
+bool	initiate_threads(t_philo *philo, t_data *data);
 
 //philosopher.c
 
@@ -88,5 +90,10 @@ bool	thinking(t_philo *philo);
 void	destroy_mutexes(t_data *data, unsigned int mutexes_created);
 void	destroy_forks(pthread_mutex_t *fork_array, unsigned int created_forks);
 void	destroy_all(t_data *data, t_philo *philo);
+
+//print_queue.c
+
+char	*printer(char *str, t_data *data);
+void	add_to_print_queue(char *new_str, t_data *data);
 
 #endif

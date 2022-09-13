@@ -32,3 +32,6 @@ voorbeelden:
 - Time_to_eat = 100 en time_to_sleep is 200, dan is time_to_think 0.
 - Time_to_eat = 200 en time_to_sleep is 500, dan is time_to_think 150.
 Bij een even aantal philo's vervalt deze regel. Laat alle philo's tegelijk starten en het lost zichzelf op.
+
+extra!
+een philosopher moet de vorken in andere volgorde oppakken.

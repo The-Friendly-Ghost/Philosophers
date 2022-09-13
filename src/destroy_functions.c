@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/29 13:29:26 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/31 13:48:43 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/09 15:24:42 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	destroy_mutexes(t_data *data, unsigned int mutexes_created)
 		pthread_mutex_destroy(&data->write_lock);
 	if (mutexes_created > 2)
 		pthread_mutex_destroy(&data->thread_init_lock);
+	if (mutexes_created > 3)
+		pthread_mutex_destroy(&data->queue_lock);
 	destroy_forks(data->forks, data->amount_philosophers);
 }
 

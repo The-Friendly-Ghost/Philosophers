@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/08/31 13:43:06 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/09 14:13:05 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	leaks_func(void)
  * @note Functions location :
  * 'initiate_data_struct' > initiate_data_struct.c
  * 'initiate_philo_struct' > initiate_philo_struct.c
- * 'initiate_philo_threads' > initiate_philo_threads.c
+ * 'initiate_threads' > initiate_threads.c
  */
 int	main(int argument_count, char **arguments)
 {
@@ -43,7 +43,7 @@ int	main(int argument_count, char **arguments)
 	philo = initiate_philo_struct(data);
 	if (philo == NULL)
 		return (destroy_all(data, philo), FAILURE);
-	if (initiate_philo_threads(philo, data) == false)
+	if (initiate_threads(philo, data) == false)
 		return (destroy_all(data, philo), FAILURE);
 	// Threads joinen
 	return (destroy_all(data, philo), SUCCES);
