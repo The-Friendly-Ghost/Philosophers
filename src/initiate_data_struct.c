@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/09 15:38:43 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/15 10:36:26 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 	if (initiate_mutexes_in_data_struct(data) == false)
 		return (free(data), NULL);
 	data->philo_dead = false;
+	data->exit_program = false;
 	data->thread_init_failed = false;
 	data->start_time = get_current_time();
 	data->print_queue = ft_calloc(data->amount_philosophers * 10, sizeof(char *));

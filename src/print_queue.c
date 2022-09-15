@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/31 15:03:35 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/09 17:49:59 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/15 11:05:23 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,32 @@ char	*printer(char *str, t_data *data)
  * @return True if initiation without error. False if there
  * is an error somewhere.
  */
-void	run_printer(t_data *data)
+void	*run_printer(t_data *data)
 {
 	static unsigned int	i;
 	unsigned int		size;
 
+	if (thread_init_success(data) == false)
+	{
+		printf("Thread initiation failed\n");
+		return (NULL);
+	}
 	size = data->amount_philosophers * 10;
-	pthread_mutex_lock(&data->queue_lock);
-	if (i >= size)
-		i = 0;
-	data->print_queue[i] = new_str;
-	i++;
-	pthread_mutex_unlock(&data->queue_lock);
+	while (1)
+	{
+		if (i >= size)
+			i = 0;
+		while (!data->print_queue[i])
+		{
+			if (terminate_thread(data) == true)
+				break ;
+			usleep(100);
+		}
+		printer(data->print_queue[i], data);
+		free(data->print_queue[i]);
+		data->print_queue[i] = NULL;
+		i++;
+	}
+	free(data->print_queue);
+	return (NULL);
 }

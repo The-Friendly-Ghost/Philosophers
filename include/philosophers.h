@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/09 15:23:04 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/15 12:47:31 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@
 
 typedef enum e_status {
 	SUCCES,
-	FAILURE
+	FAILURE,
+	RIGHT_FORK,
+	LEFT_FORK,
+	SLEEPING,
+	EATING,
+	THINKING
 }	t_status;
 
 typedef struct s_data {
@@ -34,6 +39,7 @@ typedef struct s_data {
 	unsigned int	eat_limit;
 	bool			eat_limit_enabled;
 	bool			philo_dead;
+	bool			exit_program;
 	bool			thread_init_failed;
 	pthread_mutex_t	thread_init_lock;
 	pthread_mutex_t	philo_dead_lock;
@@ -79,6 +85,10 @@ bool	initiate_threads(t_philo *philo, t_data *data);
 
 void	*run_philosopher(void *philo_struct);
 
+//monitor.c
+
+bool	thread_init_success(t_data *data);
+
 //philosopher_actions.c
 
 bool	eating(t_philo *philo);
@@ -95,5 +105,6 @@ void	destroy_all(t_data *data, t_philo *philo);
 
 char	*printer(char *str, t_data *data);
 void	add_to_print_queue(char *new_str, t_data *data);
+void	*run_printer(t_data *data);
 
 #endif
