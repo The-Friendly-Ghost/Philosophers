@@ -6,13 +6,11 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/15 10:36:26 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/16 13:51:17 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdlib.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <limits.h>
@@ -98,7 +96,7 @@ static bool	convert_str_to_int(const char *argument, unsigned int *data)
 }
 
 /**
- * Initialize arguments into the data struct. 
+ * Initiate arguments into the data struct.
  * @param data Struct with the program data in it
  * @param argument_count Amount of arguments
  * @param argument Arguments inputted on the command line

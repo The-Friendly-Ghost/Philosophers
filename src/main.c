@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/09 14:13:05 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/16 14:16:26 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int argument_count, char **arguments)
 		return (destroy_all(data, philo), FAILURE);
 	if (initiate_threads(philo, data) == false)
 		return (destroy_all(data, philo), FAILURE);
-	// Threads joinen
+	monitor_shit(data, philo);
+	join_threads(data);
 	return (destroy_all(data, philo), SUCCES);
 }

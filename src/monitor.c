@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/15 10:36:58 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/15 11:59:50 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/16 14:38:50 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,43 @@ bool	kill_philo(t_philo *philo)
 	long	elapsed_time;
 
 	current_time = get_current_time();
-	pthread_mutex_lock(&data->philo_dead_lock);
-	if (philo->last_meal - current_time > data->time_to_die
+	pthread_mutex_lock(&philo->data->philo_dead_lock);
+	if (philo->last_meal - current_time > philo->data->time_to_die
 		&& philo->data->philo_dead == false)
 	{
 		philo->data->philo_dead = true;
-		pthread_mutex_unlock(&data->philo_dead_lock);
+		pthread_mutex_unlock(&philo->data->philo_dead_lock);
 		elapsed_time = current_time - philo->data->start_time;
-		pthread_mutex_lock(&data->write_lock);
+		pthread_mutex_lock(&philo->data->write_lock);
 		printf("%010ld - Philo %d has died\n", elapsed_time, philo->id);
-		pthread_mutex_unlock(&data->write_lock);
+		pthread_mutex_unlock(&philo->data->write_lock);
 		return (true);
 	}
-	pthread_mutex_unlock(&data->philo_dead_lock);
+	pthread_mutex_unlock(&philo->data->philo_dead_lock);
 	return (false);
+}
+
+void	monitor_shit(t_data *data, t_philo *philo)
+{
+	unsigned int	finished;
+	unsigned int	i;
+
+	while (1)
+	{
+		i = 0;
+		finished = 0;
+		while (i < data->amount_philosophers)
+		{
+			if ()
+		}
+		if (finished == data->amount_philosophers)
+		{
+			pthread_mutex_lock(&philo->data->philo_dead_lock);
+			data->philo_dead = true;
+			pthread_mutex_unlock(&philo->data->philo_dead_lock);
+			return ;
+		}
+		usleep(100);
+	}
+	return ;
 }

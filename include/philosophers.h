@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/15 12:47:31 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/16 14:29:11 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum e_status {
 	LEFT_FORK,
 	SLEEPING,
 	EATING,
-	THINKING
+	THINKING,
+	DIED
 }	t_status;
 
 typedef struct s_data {

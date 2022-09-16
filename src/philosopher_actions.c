@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 17:04:43 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/15 12:56:40 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/16 14:06:18 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	print_message(t_philo *philo, t_status status)
 		printf("%010ld - Philo %d is eating\n", time, philo->id);
 	else if (status == THINKING)
 		printf("%010ld - Philo %d is thinking\n", time, philo->id);
-	pthread_mutex_unlock(&philo->data->write_lock);
 }
 
 static bool pick_up_forks(t_philo *philo)
@@ -69,6 +68,7 @@ bool	eating(t_philo *philo)
 			pthread_mutex_unlock(&philo->left_fork);
 			pthread_mutex_unlock(&philo->right_fork);
 			return (false);
+		}
 	}
 	pthread_mutex_unlock(&philo->left_fork);
 	pthread_mutex_unlock(&philo->right_fork);
