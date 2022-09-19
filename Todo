@@ -1,24 +1,3 @@
-Parse Input. Check of argumenten kloppen
-Initialize de structs en de mutexes
-Start de threads (voor elke philo een thread)
-
-Thread loop:
-1. Check of er een fork links of rechts beschikbaar is.
-2. Is er een vork beschikbaar, pak deze dan.
-3. Geen vork beschikbaar? Ga dan in wachtstand (denken) totdat er een vork beschikbaar is.
-4. Heeft een philo beide vorken? Dan start eten.
-5. Als TTE is gehaald, leg vorken dan neer en ga slapen.
-6. Als klaar met slapen,, repeat.
-
-Checken:
-1. Is er een philosopher dood? Zo ja, stop programma direct.
-2. is de x_times_to_eat gehaald voor alle philos? Stop programma.
-
-MAG EXIT??
-Waarom USLEEP bij het maken van de threads?
-Kun je mutexes destroyen als ze niet zijn aangemaakt? Hier moet je voor checken toch?
-
-
 
 verbeteringen
 - Maak een aparte write thread waar je een queue in maakt voor de te schrijven opdrachten. Hoeveel plekken

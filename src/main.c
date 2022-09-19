@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/16 14:16:26 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/19 15:46:51 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,27 @@
 void	leaks_func(void)
 {
 	system("leaks -q philo");
+}
+
+/**
+ * The first function that a philo thread starts. Basically, this
+ * is the main function of a philo thread.
+ * @param philo_struct A (void) pointer to the philo struct for this
+ * philosopher.
+ * @return Nothing
+ */
+bool	join_threads(pthread_t *threads, t_data *data)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < data->amount_philosophers)
+	{
+		if (pthread_join(threads[i], NULL) != 0)
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 /**
@@ -32,20 +53,24 @@ void	leaks_func(void)
  */
 int	main(int argument_count, char **arguments)
 {
-	t_data	*data;
-	t_philo	*philo;
+	t_data		*data;
+	t_philo		*philo;
+	pthread_t	*threads;
 
 	//atexit(leaks_func);
 	philo = NULL;
+	threads = NULL;
 	data = initiate_data_struct(argument_count, arguments);
 	if (data == NULL)
 		return (FAILURE);
 	philo = initiate_philo_struct(data);
 	if (philo == NULL)
 		return (destroy_all(data, philo), FAILURE);
-	if (initiate_threads(philo, data) == false)
+	threads = initiate_threads(philo, data);
+	if (threads == NULL)
 		return (destroy_all(data, philo), FAILURE);
-	monitor_shit(data, philo);
-	join_threads(data);
-	return (destroy_all(data, philo), SUCCES);
+	monitor_shit(data, philo, 0, 0);
+	if (join_threads(threads, data) == false)
+		return (destroy_all(data, philo), FAILURE);
+	return (free(threads), destroy_all(data, philo), SUCCES);
 }

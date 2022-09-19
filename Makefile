@@ -6,7 +6,7 @@
 #    By: cpost <cpost@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/07/11 13:49:40 by cpost         #+#    #+#                  #
-#    Updated: 2022/07/25 14:30:07 by cpost         ########   odam.nl          #
+#    Updated: 2022/09/19 16:07:18 by cpost         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC_PATH = ./include/
 NAME = philo
 #BONUS_NAME = philo_bonus
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRC_NAME = $(shell ls $(SRC_PATH))
 #SHR_NAME = $(shell ls $(SHR_PATH))

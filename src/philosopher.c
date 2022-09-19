@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/10 10:57:39 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/15 12:34:46 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/19 16:15:28 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*run_philosopher(void *philo_struct)
 		return (NULL);
 	}
 	pthread_mutex_lock(&philo->data->write_lock);
-	printf("%010ld - Philo %d is thinking\n", 0, philo->id);
+	printf("%010ld - Philo %d is thinking\n", (long)0, philo->id);
 	pthread_mutex_unlock(&philo->data->write_lock);
 	while (terminate_thread(philo->data) == false)
 	{

@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/16 13:51:17 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/19 16:36:51 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@
  * @return True if initiation without error. False if there
  * is an error somewhere.
  */
-static bool	initiate_forks(unsigned int amount_philos,
-		pthread_mutex_t *fork_array)
+static bool	initiate_forks(t_data *data)
 {
-	unsigned int	fork_id;
+	unsigned int		fork_id;
+	const unsigned int	amount_philos = data->amount_philosophers;
 
-	fork_array = ft_calloc(amount_philos, sizeof(pthread_mutex_t));
-	if (fork_array == NULL)
+	data->forks = ft_calloc(amount_philos, sizeof(pthread_mutex_t));
+	if (data->forks == NULL)
 		return (false);
 	fork_id = 0;
 	while (fork_id < amount_philos)
 	{
-		if (pthread_mutex_init(&fork_array[fork_id], NULL) != 0)
-			return (destroy_forks(fork_array, fork_id), false);
+		if (pthread_mutex_init(&data->forks[fork_id], NULL) != 0)
+			return (destroy_forks(data->forks, fork_id), false);
 		fork_id++;
 	}
 	return (true);
@@ -50,7 +50,7 @@ static bool	initiate_forks(unsigned int amount_philos,
  */
 static bool	initiate_mutexes_in_data_struct(t_data *data)
 {
-	if (initiate_forks(data->amount_philosophers, data->forks) == false)
+	if (initiate_forks(data) == false)
 		return (false);
 	if (pthread_mutex_init(&data->philo_dead_lock, NULL) != 0)
 		return (destroy_mutexes(data, 0), false);
@@ -58,8 +58,8 @@ static bool	initiate_mutexes_in_data_struct(t_data *data)
 		return (destroy_mutexes(data, 1), false);
 	if (pthread_mutex_init(&data->thread_init_lock, NULL) != 0)
 		return (destroy_mutexes(data, 2), false);
-	if (pthread_mutex_init(&data->queue_lock, NULL) != 0)
-		return (destroy_mutexes(data, 3), false);
+	// if (pthread_mutex_init(&data->queue_lock, NULL) != 0)
+	// 	return (destroy_mutexes(data, 3), false);
 	return (true);
 }
 
@@ -146,7 +146,7 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 	t_data	*data;
 
 	if (argument_count != 5 && argument_count != 6)
-		return (printer("Invalid amount of arguments\n", data));
+		return (printf("Invalid amount of arguments\n"), NULL);
 	data = malloc(sizeof(t_data));
 	if (data == NULL)
 		return (NULL);
@@ -155,9 +155,8 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 	if (initiate_mutexes_in_data_struct(data) == false)
 		return (free(data), NULL);
 	data->philo_dead = false;
-	data->exit_program = false;
 	data->thread_init_failed = false;
 	data->start_time = get_current_time();
-	data->print_queue = ft_calloc(data->amount_philosophers * 10, sizeof(char *));
+	//data->print_queue = ft_calloc(data->amount_philosophers * 10, sizeof(char *));
 	return (data);
 }

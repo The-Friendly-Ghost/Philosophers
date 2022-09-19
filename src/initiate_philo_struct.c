@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:35 by casper        #+#    #+#                 */
-/*   Updated: 2022/08/31 15:15:00 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/19 16:26:42 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_philo	*initiate_philo_struct(t_data *data)
 		philo[i].left_fork = &data->forks[i];
 		philo[i].right_fork = &data->forks[(i + 1) % data->amount_philosophers];
 		philo[i].last_meal = get_current_time();
+		if (pthread_mutex_init(&philo[i].meal_lock, NULL) != 0)
+			return (destroy_meal_lock(philo, i + 1), free(philo), NULL);
 		i++;
 	}
 	return (philo);
