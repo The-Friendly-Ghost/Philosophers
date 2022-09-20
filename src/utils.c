@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/19 15:38:36 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/20 16:13:27 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	an_argument_is_zero(t_data *data)
  * Gets the current time (in microseconds)
  * @return The time
  */
-long	get_current_time(void)
+unsigned long	get_current_time(void)
 {
 	struct timeval	time;
 

@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/15 10:36:58 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/19 16:02:49 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/20 14:14:49 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,24 @@ bool	terminate_thread(t_data *data)
  */
 bool	kill_philo(t_philo *philo)
 {
-	long	current_time;
-	long	elapsed_time;
+	unsigned long	current_time;
+	unsigned long	elapsed_time;
 
 	current_time = get_current_time();
+	pthread_mutex_lock(&philo->meal_lock);
 	pthread_mutex_lock(&philo->data->philo_dead_lock);
-	if (philo->last_meal - current_time > philo->data->time_to_die
+	if (current_time - philo->last_meal > philo->data->time_to_die
 		&& philo->data->philo_dead == false)
 	{
+		pthread_mutex_unlock(&philo->meal_lock);
 		philo->data->philo_dead = true;
 		pthread_mutex_unlock(&philo->data->philo_dead_lock);
 		elapsed_time = current_time - philo->data->start_time;
-		pthread_mutex_lock(&philo->data->write_lock);
-		printf("%010ld - Philo %d has died\n", elapsed_time, philo->id);
-		pthread_mutex_unlock(&philo->data->write_lock);
+		printf("%ld %d died\n", elapsed_time, philo->id);
+		pthread_mutex_unlock(&philo->data->philo_dead_lock);
 		return (true);
 	}
+	pthread_mutex_unlock(&philo->meal_lock);
 	pthread_mutex_unlock(&philo->data->philo_dead_lock);
 	return (false);
 }
