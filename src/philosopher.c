@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/10 10:57:39 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/21 12:03:30 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 16:50:22 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,8 @@
  */
 static void	run_one_philo(t_philo *philo)
 {
-	long	time;
-
 	printf("%ld %d has taken a fork\n", (long)0, philo->id);
 	usleep(philo->data->time_to_die * 1000);
-	time = get_current_time() - philo->data->start_time;
-	printf("%ld %d died\n", time, philo->id);
-	pthread_mutex_lock(&philo->data->philo_dead_lock);
-	philo->data->philo_dead = true;
-	pthread_mutex_unlock(&philo->data->philo_dead_lock);
 }
 
 /**

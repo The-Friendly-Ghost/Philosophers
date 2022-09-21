@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 11:34:46 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:33:50 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef enum e_status {
 }	t_status;
 
 typedef struct s_data {
-	char			**print_queue;
 	unsigned int	amount_philosophers;
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
@@ -45,7 +44,6 @@ typedef struct s_data {
 	pthread_mutex_t	thread_init_lock;
 	pthread_mutex_t	philo_dead_lock;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	queue_lock;
 	pthread_mutex_t	*forks;
 }	t_data;
 
@@ -58,10 +56,6 @@ typedef struct s_philo {
 	pthread_mutex_t	*right_fork;
 	t_data			*data;
 }	t_philo;
-
-//main.c
-
-void			print_values(t_data	*data);
 
 //utils.c
 
@@ -109,11 +103,5 @@ void			destroy_forks(pthread_mutex_t *fork_array,
 					unsigned int created_forks);
 void			destroy_all(t_data *data, t_philo *philo);
 void			destroy_meal_lock(t_philo *philo, unsigned int created);
-
-//print_queue.c
-
-char			*printer(char *str, t_data *data);
-void			add_to_print_queue(char *new_str, t_data *data);
-void			*run_printer(t_data *data);
 
 #endif

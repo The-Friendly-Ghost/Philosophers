@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/15 10:36:58 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 12:07:32 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:21:25 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,20 @@ bool	terminate_thread(t_data *data)
  */
 bool	kill_philo(t_philo *philo)
 {
-	unsigned long	current_time;
 	unsigned long	elapsed_time;
 
-	current_time = get_current_time();
 	pthread_mutex_lock(&philo->meal_lock);
 	pthread_mutex_lock(&philo->data->philo_dead_lock);
-	if (current_time - philo->last_meal > philo->data->time_to_die
+	if (get_current_time() - philo->last_meal > philo->data->time_to_die
 		&& philo->data->philo_dead == false)
 	{
 		pthread_mutex_unlock(&philo->meal_lock);
 		philo->data->philo_dead = true;
 		pthread_mutex_unlock(&philo->data->philo_dead_lock);
-		elapsed_time = current_time - philo->data->start_time;
 		pthread_mutex_lock(&philo->data->write_lock);
+		elapsed_time = get_current_time() - philo->data->start_time;
 		printf("%ld %d died\n", elapsed_time, philo->id);
 		pthread_mutex_unlock(&philo->data->write_lock);
-		pthread_mutex_unlock(&philo->data->philo_dead_lock);
 		return (true);
 	}
 	pthread_mutex_unlock(&philo->meal_lock);
@@ -111,24 +108,24 @@ void	monitor_shit(t_data *data, t_philo *philo, unsigned int finished,
 {
 	while (terminate_thread(data) == false)
 	{
-		if (data->eat_limit_enabled == true)
+		i = 0;
+		finished = 0;
+		while (i < data->amount_philosophers)
 		{
-			i = 0;
-			finished = 0;
-			while (i < data->amount_philosophers)
-			{
-				if (philo_ate_enough(data, &philo[i]) == true)
-					finished++;
-				i++;
-			}
-			if (finished == data->amount_philosophers)
-			{
-				pthread_mutex_lock(&philo->data->philo_dead_lock);
-				data->philo_dead = true;
-				pthread_mutex_unlock(&philo->data->philo_dead_lock);
+			if (data->eat_limit_enabled == true
+				&& philo_ate_enough(data, &philo[i]) == true)
+				finished++;
+			if (kill_philo(philo) == true)
 				return ;
-			}
+			i++;
 		}
-		usleep(200);
+		if (finished == data->amount_philosophers)
+		{
+			pthread_mutex_lock(&philo->data->philo_dead_lock);
+			data->philo_dead = true;
+			pthread_mutex_unlock(&philo->data->philo_dead_lock);
+			return ;
+		}
 	}
+	usleep(200);
 }

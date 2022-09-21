@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/10 10:06:34 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/19 15:48:22 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:18:53 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ pthread_t	*initiate_threads(t_philo *philo, t_data *data)
 		}
 		i++;
 	}
-	// if (pthread_create(&data->thread[i], NULL, run_printer, &data) != 0)
-	// {
-	// 	data->thread_init_failed = true;
-	// 	pthread_mutex_unlock(&data->thread_init_lock);
-	// 	return (false);
-	// }
 	pthread_mutex_unlock(&data->thread_init_lock);
 	return (thread);
 }

@@ -6,12 +6,11 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/20 14:04:40 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:18:09 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdlib.h>
 #include <stddef.h>
 #include <limits.h>
 
@@ -58,8 +57,6 @@ static bool	initiate_mutexes_in_data_struct(t_data *data)
 		return (destroy_mutexes(data, 1), false);
 	if (pthread_mutex_init(&data->thread_init_lock, NULL) != 0)
 		return (destroy_mutexes(data, 2), false);
-	// if (pthread_mutex_init(&data->queue_lock, NULL) != 0)
-	// 	return (destroy_mutexes(data, 3), false);
 	return (true);
 }
 
@@ -157,10 +154,5 @@ t_data	*initiate_data_struct(int argument_count, char **argument)
 	data->philo_dead = false;
 	data->thread_init_failed = false;
 	data->start_time = get_current_time();
-	// data->time_to_die *= 1000;
-	// data->time_to_eat *= 1000;
-	// data->time_to_sleep *= 1000;
-	// data->time_to_think *= 1000;
-	//data->print_queue = ft_calloc(data->amount_philosophers * 10, sizeof(char *));
 	return (data);
 }

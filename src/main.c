@@ -6,18 +6,11 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/19 15:46:51 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:19:14 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdlib.h>
-#include <stdio.h>
-
-void	leaks_func(void)
-{
-	system("leaks -q philo");
-}
 
 /**
  * The first function that a philo thread starts. Basically, this
@@ -57,7 +50,6 @@ int	main(int argument_count, char **arguments)
 	t_philo		*philo;
 	pthread_t	*threads;
 
-	//atexit(leaks_func);
 	philo = NULL;
 	threads = NULL;
 	data = initiate_data_struct(argument_count, arguments);

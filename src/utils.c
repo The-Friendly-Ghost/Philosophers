@@ -6,13 +6,12 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/20 16:13:27 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:25:16 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 #include <sys/time.h>
-#include <stdio.h>
 
 /**
  * If the amount of philosophers is odd, then the time to eat must fit
@@ -57,12 +56,16 @@ unsigned long	get_current_time(void)
 {
 	struct timeval	time;
 
-	if (gettimeofday(&time, NULL) != 0)
-		return (0); // Change this. If gettimeofday doesn't return 0, delete
-					// structs and exit program
+	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+/**
+ * @brief Child function of ft_calloc. Fills a defined size with zero's
+ * @param s Pointer to the array that has to be filled with zero's
+ * @param n Amount of memory that has to be filled
+ * @return void * - Address to array filled with 0's
+ */
 static void	*ft_bzero(void *s, size_t n)
 {
 	unsigned char	*x;

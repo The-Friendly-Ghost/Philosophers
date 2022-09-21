@@ -6,13 +6,11 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:35 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/19 16:26:42 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:18:45 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
  * Initiate mutexes in the data struct

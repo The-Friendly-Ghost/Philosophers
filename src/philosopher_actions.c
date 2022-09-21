@@ -6,13 +6,11 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 17:04:43 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 12:07:55 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 17:22:28 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <unistd.h>
-#include <stdio.h>
 
 void	print_message(t_philo *philo, t_status status)
 {
