@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/15 10:36:58 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/20 14:14:49 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 12:07:32 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ bool	kill_philo(t_philo *philo)
 		philo->data->philo_dead = true;
 		pthread_mutex_unlock(&philo->data->philo_dead_lock);
 		elapsed_time = current_time - philo->data->start_time;
+		pthread_mutex_lock(&philo->data->write_lock);
 		printf("%ld %d died\n", elapsed_time, philo->id);
+		pthread_mutex_unlock(&philo->data->write_lock);
 		pthread_mutex_unlock(&philo->data->philo_dead_lock);
 		return (true);
 	}
@@ -127,6 +129,6 @@ void	monitor_shit(t_data *data, t_philo *philo, unsigned int finished,
 				return ;
 			}
 		}
-		usleep(100);
+		usleep(200);
 	}
 }

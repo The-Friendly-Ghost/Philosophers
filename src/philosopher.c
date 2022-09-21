@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/10 10:57:39 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/20 16:18:32 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 12:03:30 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	*run_philosopher(void *philo_struct)
 	}
 	if (philo->data->amount_philosophers == 1)
 		return (run_one_philo(philo), NULL);
-	printf("%d %d is thinking\n", 0, philo->id);
+	print_message(philo, THINKING);
 	if (philo->id % 2 == 0)
-		usleep(200);
-	while (terminate_thread(philo->data) == false)
+		usleep(300);
+	while (1)
 	{
 		if (eating(philo) == false)
 			break ;

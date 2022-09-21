@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/20 10:52:56 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/21 11:34:46 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ bool			philo_ate_enough(t_data *data, t_philo *philo);
 bool			eating(t_philo *philo);
 bool			sleeping(t_philo *philo);
 bool			thinking(t_philo *philo);
+void			print_message(t_philo *philo, t_status status);
 
 //destroy_mutexes.c
 
