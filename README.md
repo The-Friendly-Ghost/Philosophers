@@ -1,5 +1,7 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers/badge)](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers)
 # Philosophers 🧠 
+[![CodeFactor](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers/badge)](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers)
+
+### Goal of the project:
 "In this project, you will learn the basics of threading a process. You will see how to create threads and you will discover mutexes."
 
 ### Rules of the 'game':
