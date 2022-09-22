@@ -1,3 +1,4 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers/badge)](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers)
 # Philosophers 🧠 
 "In this project, you will learn the basics of threading a process. You will see how to create threads and you will discover mutexes."
 
@@ -24,5 +25,3 @@ a philosopher dies of starvation.
 - Learned: working with mutexes.
 - Improved: optimizing code for better program performance.
 - Improved: memory management and pointers.
-
-[![CodeFactor](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers/badge)](https://www.codefactor.io/repository/github/the-friendly-ghost/philosophers)
