@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 17:04:43 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 17:22:28 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/22 11:34:27 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ bool	sleeping(t_philo *philo)
 {
 	long	current_time;
 
-	if (terminate_thread(philo->data) == true || kill_philo(philo) == true)
-			return (false);
 	print_message(philo, SLEEPING);
+	if (terminate_thread(philo->data) == true || kill_philo(philo) == true)
+		return (false);
 	current_time = get_current_time();
 	while (get_current_time() - current_time < philo->data->time_to_sleep)
 		usleep(250);
@@ -84,9 +84,9 @@ bool	thinking(t_philo *philo)
 {
 	long	current_time;
 
+	print_message(philo, THINKING);
 	if (terminate_thread(philo->data) == true || kill_philo(philo) == true)
 		return (false);
-	print_message(philo, THINKING);
 	current_time = get_current_time();
 	while (get_current_time() - current_time < philo->data->time_to_think)
 		usleep(250);

@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/15 10:36:58 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 17:21:25 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/22 11:26:32 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ bool	kill_philo(t_philo *philo)
 		pthread_mutex_unlock(&philo->meal_lock);
 		philo->data->philo_dead = true;
 		pthread_mutex_unlock(&philo->data->philo_dead_lock);
-		pthread_mutex_lock(&philo->data->write_lock);
 		elapsed_time = get_current_time() - philo->data->start_time;
+		usleep(200);
 		printf("%ld %d died\n", elapsed_time, philo->id);
-		pthread_mutex_unlock(&philo->data->write_lock);
 		return (true);
 	}
 	pthread_mutex_unlock(&philo->meal_lock);
@@ -115,7 +114,7 @@ void	monitor_shit(t_data *data, t_philo *philo, unsigned int finished,
 			if (data->eat_limit_enabled == true
 				&& philo_ate_enough(data, &philo[i]) == true)
 				finished++;
-			if (kill_philo(philo) == true)
+			if (kill_philo(&philo[i]) == true)
 				return ;
 			i++;
 		}

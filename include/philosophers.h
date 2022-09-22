@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 17:33:50 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/22 11:33:42 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void			*run_philosopher(void *philo_struct);
 //monitor.c
 
 bool			thread_init_success(t_data *data);
-void			monitor_shit(t_data *data, t_philo *philo, unsigned int finished,
-					unsigned int i);
+void			monitor_shit(t_data *data, t_philo *philo,
+					unsigned int finished, unsigned int i);
 bool			terminate_thread(t_data *data);
 bool			kill_philo(t_philo *philo);
 bool			philo_ate_enough(t_data *data, t_philo *philo);
