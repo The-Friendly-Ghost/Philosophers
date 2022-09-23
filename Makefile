@@ -6,7 +6,7 @@
 #    By: cpost <cpost@student.codam.nl>               +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/07/11 13:49:40 by cpost         #+#    #+#                  #
-#    Updated: 2022/09/22 11:36:35 by cpost         ########   odam.nl          #
+#    Updated: 2022/09/22 13:33:35 by cpost         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC_PATH = ./include/
 
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast
 
 SRC_NAME = $(shell ls $(SRC_PATH))
 

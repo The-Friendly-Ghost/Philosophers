@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 17:04:43 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/22 11:34:27 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/23 17:11:20 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,23 @@ bool	eating(t_philo *philo)
 	pick_up_forks(philo);
 	print_message(philo, EATING);
 	pthread_mutex_lock(&philo->meal_lock);
-	philo->x_eaten += 1;
 	philo->last_meal = get_current_time();
 	pthread_mutex_unlock(&philo->meal_lock);
 	while (get_current_time() - philo->last_meal < philo->data->time_to_eat)
+	{
+		if (terminate_thread(philo->data) == true)
+		{
+			pthread_mutex_unlock(philo->left_fork);
+			pthread_mutex_unlock(philo->right_fork);
+			return (false);
+		}
 		usleep(250);
+	}
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_lock(&philo->meal_lock);
+	philo->x_eaten += 1;
+	pthread_mutex_unlock(&philo->meal_lock);
 	return (true);
 }
 
@@ -76,7 +86,11 @@ bool	sleeping(t_philo *philo)
 		return (false);
 	current_time = get_current_time();
 	while (get_current_time() - current_time < philo->data->time_to_sleep)
+	{
+		if (terminate_thread(philo->data) == true)
+			return (false);
 		usleep(250);
+	}
 	return (true);
 }
 
@@ -89,6 +103,10 @@ bool	thinking(t_philo *philo)
 		return (false);
 	current_time = get_current_time();
 	while (get_current_time() - current_time < philo->data->time_to_think)
+	{
+		if (terminate_thread(philo->data) == true)
+			return (false);
 		usleep(250);
+	}
 	return (true);
 }

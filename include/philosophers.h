@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/22 11:33:42 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/23 13:14:09 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+#define ALL_MUTEXES 99
 
 typedef enum e_status {
 	SUCCES,
@@ -99,8 +101,7 @@ void			print_message(t_philo *philo, t_status status);
 //destroy_mutexes.c
 
 void			destroy_mutexes(t_data *data, unsigned int mutexes_created);
-void			destroy_forks(pthread_mutex_t *fork_array,
-					unsigned int created_forks);
+void			destroy_forks(t_data *data, unsigned int created_forks);
 void			destroy_all(t_data *data, t_philo *philo);
 void			destroy_meal_lock(t_philo *philo, unsigned int created);
 

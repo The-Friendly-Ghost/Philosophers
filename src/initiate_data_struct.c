@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/12 12:20:19 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/21 17:18:09 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/23 13:05:18 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	initiate_forks(t_data *data)
 	while (fork_id < amount_philos)
 	{
 		if (pthread_mutex_init(&data->forks[fork_id], NULL) != 0)
-			return (destroy_forks(data->forks, fork_id), false);
+			return (destroy_forks(data, fork_id), false);
 		fork_id++;
 	}
 	return (true);

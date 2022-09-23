@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/15 10:36:58 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/22 11:26:32 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/23 17:03:44 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	kill_philo(t_philo *philo)
 
 	pthread_mutex_lock(&philo->meal_lock);
 	pthread_mutex_lock(&philo->data->philo_dead_lock);
-	if (get_current_time() - philo->last_meal > philo->data->time_to_die
+	if (get_current_time() - philo->last_meal >= philo->data->time_to_die
 		&& philo->data->philo_dead == false)
 	{
 		pthread_mutex_unlock(&philo->meal_lock);

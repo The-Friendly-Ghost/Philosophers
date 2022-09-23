@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:47:53 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/22 11:28:44 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/23 13:54:39 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ bool	join_threads(pthread_t *threads, t_data *data)
 	i = 0;
 	while (i < data->amount_philosophers)
 	{
-		if (pthread_join(threads[i], NULL) != 0)
-			return (false);
+		pthread_join(threads[i], NULL);
 		i++;
 	}
 	return (true);
+}
+void	f(void)
+{
+	system("leaks -q philo");
 }
 
 /**
@@ -52,6 +55,7 @@ int	main(int argument_count, char **arguments)
 
 	philo = NULL;
 	threads = NULL;
+	//atexit(f);
 	data = initiate_data_struct(argument_count, arguments);
 	if (data == NULL)
 		return (FAILURE);
@@ -66,3 +70,6 @@ int	main(int argument_count, char **arguments)
 		return (destroy_all(data, philo), FAILURE);
 	return (free(threads), destroy_all(data, philo), SUCCES);
 }
+
+
+// https://www.codequoi.com/en/philosophers-01-threads-and-mutexes/ TESTEN!!!
