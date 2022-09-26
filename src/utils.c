@@ -6,7 +6,7 @@
 /*   By: casper <cpost@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/07 17:19:19 by casper        #+#    #+#                 */
-/*   Updated: 2022/09/23 17:06:33 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/26 10:39:33 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	set_time_to_think(t_data *data)
  */
 bool	an_argument_is_zero(t_data *data)
 {
-	if (data->amount_philosophers == 0 
+	if (data->amount_philosophers == 0
 		|| (data->eat_limit == 0 && data->eat_limit_enabled == true))
 	{
-		printf("Error: arguments can not be 0 or less\n");
+		printf("Error: invalid argument\n");
 		return (true);
 	}
 	else

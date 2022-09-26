@@ -6,7 +6,7 @@
 /*   By: cpost <cpost@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/11 13:48:17 by cpost         #+#    #+#                 */
-/*   Updated: 2022/09/23 13:14:09 by cpost         ########   odam.nl         */
+/*   Updated: 2022/09/26 10:34:49 by cpost         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-#define ALL_MUTEXES 99
+# define ALL_MUTEXES 99
 
 typedef enum e_status {
 	SUCCES,
